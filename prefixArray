@@ -1,0 +1,19 @@
+import requests
+import json
+token = '0ed42f3dadf8d35e46f449c1ae198824'
+r = requests.post('http://challenge.code2040.org/api/prefix', data = {'token': token})
+print(r.text)
+dictt = json.loads(r.text)
+prefix = dictt['prefix']
+array = dictt['array']
+print(array)
+strings = []
+i = 0
+
+while i < len(array):
+    if prefix != str(array[i])[0:len(prefix)]:
+        strings.append(str(array[i]))
+    i += 1
+print(strings)
+newR = requests.post('http://challenge.code2040.org/api/prefix/validate', data = {'token': token, 'array':strings})
+print(newR.text)
